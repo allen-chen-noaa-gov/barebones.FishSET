@@ -47,7 +47,7 @@ shift_sort_x <- function(x, ch, y, distance, alts, ab) {
         d[[j]] <- cbind(as.matrix(y[j, ]), as.matrix(ch[j, ]), xsorted)
         
     }
-    
+
     d <- do.call("rbind", d)
     
     return(d)

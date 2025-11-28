@@ -115,7 +115,8 @@ logit_correction_polyint <- function(starts3, dat, otherdat, alts) {
     startloc <- otherdat$startloc
     distance <- otherdat$distance
     singlecor <- otherdat$singlecor
-    
+    catchnoR <- otherdat$catchnoR
+
     polyn <- otherdat$polyn
     intpoly <- otherdat$polyintnum
     regconstant <- otherdat$regconstant
@@ -128,11 +129,14 @@ logit_correction_polyint <- function(starts3, dat, otherdat, alts) {
 
     gridlength <- (gridnum * alts) + 
         ((((polyn + polyconstant) * (1+(1-singlecor))) + 
-        intpoly) * alts)
+        intpoly) * alts) - (catchnoR*alts) + catchnoR
         
     noCgridlength <- (noCgridnum)
     
-    gridcoef <- as.matrix(starts3[2:(1 + gridlength), ])
+    gridcoef <- as.matrix(c(starts3[2:(alts+1), ],
+      rep(starts3[(alts+2):(alts+catchnoR+1)],
+      each = alts), starts3[(alts+catchnoR+1+1):(1 + gridlength), ]))
+    # gridcoef <- as.matrix(starts3[2:(1 + gridlength), ])
     
     if (any(is.na(otherdat$noCgriddat)) == TRUE) {
     noCgridcoef <- 0
@@ -284,7 +288,7 @@ logit_correction_polyint <- function(starts3, dat, otherdat, alts) {
     ld1 <- ldcatch + ldchoice
     
     ld <- -sum(ld1)
-    
+
     if (is.nan(ld) == TRUE) {
         ld <- .Machine$double.xmax
     }

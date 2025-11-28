@@ -111,6 +111,18 @@ logit_c <- function(starts3, dat, otherdat, alts) {
     
     exb <- exp(profx)
     
+    probs <- exb/matrix(rowSums(exb), obsnum, alts)
+    
+    cj <- dat[, 2]
+    
+    # locstay <- model.matrix(~as.factor(startloc) - 1)
+    locmove <- model.matrix(~as.factor(cj) - 1)
+    browser()
+    # probstay <- probs * locstay
+    probmove <- probs * locmove
+    
+    probmovesave <<- rowSums(probmove)
+
     ldchoice <- (-log(rowSums(exb)))
     
     ld <- -sum(ldchoice)

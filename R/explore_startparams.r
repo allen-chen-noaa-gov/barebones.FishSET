@@ -1,5 +1,5 @@
 explore_startparams <- function(space, startsr, dev, func, catch, choice,
-    distance, otherdat, changevec) {
+    distance, otherdat, changevec, price) {
     #' Function to explore starting value parameter space
     #'
     #' Shotgun method to find better starting values by exploring starting value
@@ -81,7 +81,6 @@ explore_startparams <- function(space, startsr, dev, func, catch, choice,
     
     for (i in 2:space) {
         
-        set.seed(i)
         savestarts[[i]] <- rnorm(length(startsr), startsr, dev)*changevec +
             startsr*(1 - changevec)
 

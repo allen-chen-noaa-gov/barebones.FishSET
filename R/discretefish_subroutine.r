@@ -1,5 +1,5 @@
 discretefish_subroutine <- function(catch, choice, distance, otherdat,
-    initparams, optimOpt, func, methodname) {
+    initparams, optimOpt, func, methodname, price) {
     #' discretefish_subroutine
     #'
     #' Subroutine to run chosen discrete choice model

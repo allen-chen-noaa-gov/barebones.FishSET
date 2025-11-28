@@ -19,9 +19,7 @@
 #'     polygon to the point.
 #' @importFrom sp CRS Polygons Polygon SpatialPolygons SpatialPolygonsDataFrame
 #'     coordinates
-#' @importFrom rgeos gDistance
 #' @importFrom grDevices chull
-#' @importFrom raster projection
 #' @details  Assign each observation to zones defined by a spatial data
 #'     set.
 #' Converts point data from gridfile into polygons and then finds which polygon
@@ -90,11 +88,12 @@ assignment_column <- function(dat, gridfile, hull.polygon,
   if (closest.pt == TRUE) {
     closest <- data.frame(matrix(NA, nrow = length(which(
         is.na(pts$ID) == TRUE)), ncol = 1))
+        #or sf::st_distance
     for (i in 1:length(which(is.na(pts$ID) == TRUE))) {
-      closest[i, 1] <- names(which(rgeos::gDistance(
+      closest[i, 1] <- names(which(terra::distance(
           dat_sub[which(is.na(pts$ID) == TRUE), ][i, ], 
           as(srdf, "SpatialLines"), byid = TRUE)[, 1] == 
-          min(rgeos::gDistance(dat_sub[which(is.na(pts$ID) == TRUE), ][i, ], 
+          min(terra::distance(dat_sub[which(is.na(pts$ID) == TRUE), ][i, ], 
           as(srdf, "SpatialLines"), byid = TRUE))))
     }
     pts[which(is.na(pts$ID) == TRUE), ] <- closest
