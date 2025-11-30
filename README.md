@@ -7,12 +7,11 @@ This is a barebones version of the FishSET package, primarily used for directly
 calling some of the lower-level functions.
 
 Installation
-
 ---
 
 To install with vignette:
 
-  > install.packages("devtools")
+  > install.packages("devtools")  
   > library(devtools)
 
 Set the directory you've downloaded the package into:
@@ -25,21 +24,21 @@ Install with vignettes:
 
 Check out documentation and vignette:
 
-  > help(package="barebones.FishSET")
+  > help(package="barebones.FishSET")  
   > vignette("barebones.FishSET.vignette", package="barebones.FishSET")
 
 Please see vignette for usage examples.
 
 You can create a stand-alone .html vignette by then running:
 
-  > setwd("barebones.FishSET")
+  > setwd("barebones.FishSET")  
   > devtools::build_vignettes()
 
 Reproducible example
 -----------------
 
 The code used to reproduce the work in "Chen, Y. Allen, Alan C. Haynie, and
-Christopher M. Anderson. 2022. Journal of the Association of Environmental and
+Christopher M. Anderson. 2023. Journal of the Association of Environmental and
 Resource Economists." can be found below. This also serves as an use example of
 the package. Please note the package functions should be generalizable to any
 discrete choice problem - please see vignette for examples.
@@ -76,7 +75,7 @@ regconstant <- 0
 
 for (it in seq(1, 4, by = 0.5)) {
 
-# run a model for each catch devation for figure 3
+# run a model for each catch deviation
 cdev <- it
 
 # about 3 hours each with 8 workers
@@ -108,3 +107,7 @@ produce figures 1 through 3. Please see MC_make_figs.r in the exec folder.
 The code to run the empirical example is also included as a script, however,
 the confidential data used to run the empirical example is not included. Please
 see Emp_ex.r in the exec folder.
+
+DISCLAIMER
+------------------------
+“This repository is a scientific product and is not official communication of the National Oceanic and Atmospheric Administration, or the United States Department of Commerce. All NOAA GitHub project code is provided on an ‘as is’ basis and the user assumes responsibility for its use. Any claims against the Department of Commerce or Department of Commerce bureaus stemming from the use of this GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.”
