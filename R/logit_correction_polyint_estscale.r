@@ -98,7 +98,6 @@ logit_correction_polyint_estscale <- function(starts3, dat, otherdat, alts) {
     #' }
     #'
    
-    avg_price <- otherdat$pricefin
     griddat <- as.matrix(do.call(cbind, otherdat$griddat))
     intdat <- as.matrix(do.call(cbind, otherdat$intdat))
     gridnum <- dim(griddat)[2]/alts
@@ -176,10 +175,10 @@ logit_correction_polyint_estscale <- function(starts3, dat, otherdat, alts) {
         obsnum, intnum)
 
     if (any(is.na(otherdat$noCgriddat)) == TRUE) {
-    betas <- matrix(c((gridbetas * matrix(revcoef, obsnum, alts) * matrix(rep(avg_price, obsnum), nrow = obsnum, byrow = TRUE)), intbetas),
+    betas <- matrix(c((gridbetas * matrix(revcoef, obsnum, alts)), intbetas),
         obsnum, (alts + 1))
     } else {
-    betas <- matrix(c((gridbetas * matrix(revcoef, obsnum, alts) * matrix(rep(avg_price, obsnum), nrow = obsnum, byrow = TRUE)), intbetas),
+    betas <- matrix(c((gridbetas * matrix(revcoef, obsnum, alts)), intbetas),
         obsnum, (alts + 1)) + cbind(noCgridbetas, rep(0, obsnum))
     }
 
@@ -195,9 +194,9 @@ logit_correction_polyint_estscale <- function(starts3, dat, otherdat, alts) {
     ldchoice <- (-log(rowSums(exb)))
 
     if (any(is.na(otherdat$noCgriddat)) == TRUE) {
-    revside <- (gridbetas * matrix(revcoef, obsnum, alts) * matrix(rep(avg_price, obsnum), nrow = obsnum, byrow = TRUE))
+    revside <- (gridbetas * matrix(revcoef, obsnum, alts))
     } else {
-    revside <- (gridbetas * matrix(revcoef, obsnum, alts) * matrix(rep(avg_price, obsnum), nrow = obsnum, byrow = TRUE)) + noCgridbetas
+    revside <- (gridbetas * matrix(revcoef, obsnum, alts)) + noCgridbetas
     }
     
     costside <- distance * intbetas
